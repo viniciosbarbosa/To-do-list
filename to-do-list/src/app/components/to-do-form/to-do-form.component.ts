@@ -40,7 +40,7 @@ export class ToDoFormComponent implements OnInit {
     this.carregarForm();
   }
 
-  carregarForm(): void {
+  public carregarForm(): void {
     this.to_do_form = new FormGroup({
       title: new FormControl("", [
         Validators.required,
@@ -53,9 +53,9 @@ export class ToDoFormComponent implements OnInit {
     });
   }
 
-  setValueForm(): void {}
+  public setValueForm(): void {}
 
-  handleSubmitForm(): void {
+  public handleSubmitForm(): void {
     if (this.to_do_form.valid && this.to_do_form.value) {
       const params = {
         title: String(this.to_do_form.controls["title"].value),
@@ -70,7 +70,7 @@ export class ToDoFormComponent implements OnInit {
     }
   }
 
-  handleCloseModal(): void {
+  public handleCloseModal(): void {
     this.dialogService.close();
   }
 }

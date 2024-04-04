@@ -29,7 +29,7 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: #e4e4e4;
+  background-color: #eaeaea;
 }
 
 .header {
@@ -107,13 +107,13 @@ body {
 .todo_card {
   width: 80%;
   margin: 1rem auto;
-  background-color: #193097 !important;
-  border-radius: 1.8rem !important;
+  background-color: #ffffff !important;
+  border-radius: 1rem !important;
 }
 
 .todo_card_title {
   font-size: 25px !important;
-  color: white !important;
+  color: #2f2f30 !important;
 }
 
 .todo_card_subtitle {
@@ -142,4 +142,15 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.edit-task {
+  background: #ffd502 !important;
+}
+
+.btn_excluir_todo {
+  display: block !important;
+  margin: 0 auto;
+  margin-top: 1rem !important;
+  margin-right: 9rem;
 }
