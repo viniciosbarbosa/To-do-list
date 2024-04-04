@@ -1,16 +1,8 @@
-<mat-tab-group color="primary">
+<mat-tab-group
+  color="primary"
+  *ngIf="toDoListData().length > 0; else withoutTodos"
+>
   <mat-tab label="Em Andamento">
-    <button
-      *ngIf="showDeleteButton"
-      mat-raised-button
-      type="button"
-      class="btn_excluir_todo"
-      color="warn"
-      (click)="deleteAllLocalStorage(false)"
-    >
-      Excluir Todo
-    </button>
-
     <div *ngFor="let item of toDoListData()" class="todo_tab">
       <mat-card class="todo_card" *ngIf="item?.done === false">
         <mat-card-header>
@@ -56,7 +48,7 @@
   </mat-tab>
 
   <mat-tab label="Finalizado">
-    <button
+    <!-- <button
       *ngIf="toDoListData().length > 0"
       mat-raised-button
       type="button"
@@ -65,7 +57,7 @@
       (click)="deleteAllLocalStorage(true)"
     >
       Excluir Todo
-    </button>
+    </button> -->
 
     <div *ngFor="let item of toDoListData()" class="todo_tab">
       <mat-card class="todo_card" *ngIf="item?.done === true">
@@ -86,7 +78,7 @@
             aria-label="Concluir Tarefa"
             (click)="handleToBeDoneElement(item.id)"
           >
-            <mat-icon class="">done_all</mat-icon>
+            <mat-icon>assignment_return</mat-icon>
           </button>
 
           <button
@@ -102,3 +94,10 @@
     </div>
   </mat-tab>
 </mat-tab-group>
+
+<ng-template #withoutTodos>
+  <h3 class="warn_message">Não há tarefas a serem exibidas</h3>
+  <span class="warn_submessage"
+    >click no botão acima para cadastrar uma nova tarefa</span
+  >
+</ng-template>

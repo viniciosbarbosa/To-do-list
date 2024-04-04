@@ -140,6 +140,15 @@ body {
   color: #041874 !important;
 }
 
+.warn_submessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem !important;
+  font-size: 18px !important;
+  color: #041874 !important;
+}
+
 html,
 body {
   height: 100%;
