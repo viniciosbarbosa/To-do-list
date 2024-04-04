@@ -12,7 +12,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
-import { MatDialogRef } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { HeaderComponent } from "../header/header.component";
 
 @Component({
@@ -35,9 +35,13 @@ export class ToDoFormComponent implements OnInit {
   public toDoListSignalsService = inject(ToDoListSignalsService);
   public allToDo = this.toDoListSignalsService.toDoState();
   public dialogService = inject(MatDialogRef<HeaderComponent>);
-
+  public dataModalCard = inject(MAT_DIALOG_DATA);
   ngOnInit(): void {
     this.carregarForm();
+    if (this.dataModalCard) {
+      console.log(this.dataModalCard);
+      this.setValueForm(this.dataModalCard.item);
+    }
   }
 
   public carregarForm(): void {
@@ -50,10 +54,17 @@ export class ToDoFormComponent implements OnInit {
         Validators.required,
         Validators.minLength(5),
       ]),
+      id: new FormControl(null),
     });
   }
 
-  public setValueForm(): void {}
+  public setValueForm(data: any): void {
+    this.to_do_form.setValue({
+      title: data.title,
+      description: data.description,
+      id: data.id,
+    });
+  }
 
   public handleSubmitForm(): void {
     if (this.to_do_form.valid && this.to_do_form.value) {
@@ -64,7 +75,28 @@ export class ToDoFormComponent implements OnInit {
         done: false,
       };
 
-      console.log(params);
+      this.toDoListSignalsService.createUpdateToDo(params);
+      this.handleCloseModal();
+    }
+  }
+
+  verifyOperationForm(): void {
+    if (this.dataModalCard && this.dataModalCard.action === "edit") {
+      this.handleUpdateDataForm();
+    } else {
+      this.handleSubmitForm();
+    }
+  }
+
+  public handleUpdateDataForm(): void {
+    if (this.to_do_form.valid && this.to_do_form.value) {
+      const params = {
+        title: String(this.to_do_form.controls["title"].value),
+        description: String(this.to_do_form.controls["description"].value),
+        id: this.to_do_form.controls["id"].value,
+        done: false,
+      };
+
       this.toDoListSignalsService.createUpdateToDo(params);
       this.handleCloseModal();
     }

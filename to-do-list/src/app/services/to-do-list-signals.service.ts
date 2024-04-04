@@ -9,10 +9,20 @@ export class ToDoListSignalsService {
   public toDoState = signal<Array<to_do_model>>([]);
 
   public createUpdateToDo(params: any): void {
-    if (params !== null || params !== undefined) {
+    if (params && params.id !== null && params.id !== undefined) {
       this.toDoState.mutate((to_do) => {
         if (to_do !== null) {
-          to_do.push(params);
+          const existingItemIndex = to_do.findIndex(
+            (item) => item.id === params.id
+          );
+          if (existingItemIndex !== -1) {
+            to_do[existingItemIndex] = {
+              ...to_do[existingItemIndex],
+              ...params,
+            };
+          } else {
+            to_do.push(params);
+          }
           console.log(to_do);
           this.saveInLocalStorage();
         }

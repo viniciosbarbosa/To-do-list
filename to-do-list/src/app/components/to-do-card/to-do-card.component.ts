@@ -7,6 +7,8 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { ToDoListSignalsService } from "src/app/services/to-do-list-signals.service";
 import { TodoKeyLocalStorage } from "src/app/models/enum/toDoKeyLocalStorage";
 import { to_do_model } from "src/app/models/model/to_do_model";
+import { MatDialog, MatDialogModule } from "@angular/material/dialog";
+import { ToDoFormComponent } from "../to-do-form/to-do-form.component";
 
 @Component({
   selector: "app-to-do-card",
@@ -18,6 +20,7 @@ import { to_do_model } from "src/app/models/model/to_do_model";
     MatButtonModule,
     MatIconModule,
     MatTabsModule,
+    MatDialogModule,
   ],
   templateUrl: "./to-do-card.component.html",
   styleUrls: [],
@@ -27,6 +30,7 @@ export class ToDoCardComponent implements OnInit {
   private toDoState = this.toDoListSignalsService.toDoState;
   public toDoListData = computed(() => this.toDoState());
   public showDeleteButton: boolean = false;
+  private dialogService = inject(MatDialog);
 
   ngOnInit(): void {
     this.getDatasLocalStorage();
@@ -39,10 +43,18 @@ export class ToDoCardComponent implements OnInit {
     ) as string;
 
     toDoData && this.toDoState.set(JSON.parse(toDoData));
-    this.showDeleteButton = this.toDoListData().some(
-      (item) => item.done == true
-    );
-    console.log(this.showDeleteButton);
+    this.statusBtn();
+
+    console.log("passou");
+  }
+
+  public statusBtn(): void {
+    this.showDeleteButton = this.toDoListData().some((item) => {
+      if (item.done === false) {
+        return true;
+      }
+      return false;
+    });
   }
 
   public saveInLocalStorage(): void {
@@ -75,6 +87,8 @@ export class ToDoCardComponent implements OnInit {
           this.saveInLocalStorage();
         });
       }
+
+      this.statusBtn();
     }
   }
 
@@ -94,5 +108,11 @@ export class ToDoCardComponent implements OnInit {
     this.showDeleteButton = false;
   }
 
-  public handleEventAddTask() {}
+  public editTask(item: to_do_model) {
+    this.dialogService.open(ToDoFormComponent, {
+      width: "50vw",
+      maxHeight: "80vh",
+      data: { item: item, action: "edit" },
+    });
+  }
 }
