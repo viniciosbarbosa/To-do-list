@@ -29,13 +29,13 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: #dededee6;
+  background-color: #e4e4e4;
 }
 
 .header {
   width: 100vw;
   height: 15vh;
-  background-color: #193097;
+  background-color: #1e3ab7;
   border-bottom-left-radius: 1.5rem;
   border-bottom-right-radius: 1.5rem;
   display: flex;
@@ -59,7 +59,7 @@ body {
   font-size: 20px !important;
   margin-right: 2rem !important;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
-  background-color: #052097 !important;
+  background-color: #041874 !important;
 }
 
 .todo_form_card {
@@ -73,7 +73,7 @@ body {
 
 .todo_form_title {
   margin-top: 1rem !important;
-  color: white;
+  color: #2f2f30;
   font-size: 30px !important;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
 }
@@ -88,7 +88,12 @@ body {
 }
 
 .todo_form_sucess_btn {
-  background-color: #02197d !important;
+  background-color: #041874 !important;
+  color: white;
+}
+
+.txt__btn_success {
+  color: white;
 }
 
 .todo_form_delete_btn {
@@ -127,8 +132,14 @@ body {
   align-items: center;
   margin-top: 1.5rem !important;
   font-size: 23px !important;
-  color: #193097 !important;
+  color: #041874 !important;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
