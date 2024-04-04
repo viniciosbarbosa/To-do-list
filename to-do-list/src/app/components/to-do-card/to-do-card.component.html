@@ -84,6 +84,7 @@
             class="header_btn check-btn"
             mat-icon-button
             aria-label="Concluir Tarefa"
+            (click)="handleToBeDoneElement(item.id)"
           >
             <mat-icon class="">done_all</mat-icon>
           </button>

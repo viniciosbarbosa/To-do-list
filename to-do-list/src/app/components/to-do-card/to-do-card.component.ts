@@ -77,6 +77,22 @@ export class ToDoCardComponent implements OnInit {
     }
   }
 
+  handleToBeDoneElement(toDoId: number) {
+    if (toDoId) {
+      this.toDoState.mutate((todos) => {
+        const todoSelected = todos.find(
+          (todo) => todo?.id === toDoId
+        ) as to_do_model;
+
+        console.log(todoSelected);
+
+        todoSelected && (todoSelected.done = false);
+
+        this.saveInLocalStorage();
+      });
+    }
+  }
+
   public handleDeleteElement(toDo: to_do_model): void {
     if (toDo) {
       const index = this.toDoListData().indexOf(toDo);
