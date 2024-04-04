@@ -1,16 +1,73 @@
 <mat-tab-group color="primary">
   <mat-tab label="Em Andamento">
     <button
+      *ngIf="showDeleteButton"
+      mat-raised-button
+      type="button"
+      class="btn_excluir_todo"
+      color="warn"
+      (click)="deleteAllLocalStorage(false)"
+    >
+      Excluir Todo
+    </button>
+
+    <div *ngFor="let item of toDoListData()" class="todo_tab">
+      <mat-card class="todo_card" *ngIf="item?.done === false">
+        <mat-card-header>
+          <mat-card-title class="todo_card_title">
+            {{ item.title }}
+          </mat-card-title>
+
+          <mat-card-subtitle class="todo_card_subtitle">
+            {{ item.description }}
+          </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-actions class="todo_card_btn_actions" align="end">
+          <button
+            class="header_btn check-btn"
+            mat-icon-button
+            aria-label="Concluir Tarefa"
+            (click)="handleDoneElement(item.id)"
+          >
+            <mat-icon class="">done_all</mat-icon>
+          </button>
+
+          <button
+            class="header_btn check-btn edit-task"
+            mat-icon-button
+            aria-label="Editar Task"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button
+            class="header_btn check-btn todo_form_delete_btn"
+            mat-icon-button
+            aria-label="Deletar task"
+            (click)="handleDeleteElement(item)"
+          >
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Finalizado">
+    <button
       *ngIf="toDoListData().length > 0"
       mat-raised-button
       type="button"
       class="btn_excluir_todo"
       color="warn"
+      (click)="deleteAllLocalStorage(true)"
     >
       Excluir Todo
     </button>
-    <div *ngFor="let item of toDoListData()">
-      <mat-card class="todo_card" *ngIf="item?.done === false">
+
+    <div *ngFor="let item of toDoListData()" class="todo_tab">
+      <mat-card class="todo_card" *ngIf="item?.done === true">
         <mat-card-header>
           <mat-card-title class="todo_card_title">
             {{ item.title }}
@@ -31,18 +88,10 @@
           </button>
 
           <button
-            class="header_btn check-btn edit-task"
-            mat-icon-button
-            aria-label="Editar Task"
-          >
-            <mat-icon>edit</mat-icon>
-          </button>
-
-          <button
             class="header_btn check-btn todo_form_delete_btn"
             mat-icon-button
             aria-label="Deletar task"
-            click
+            (click)="handleDeleteElement(item)"
           >
             <mat-icon>delete_forever</mat-icon>
           </button>
@@ -50,5 +99,4 @@
       </mat-card>
     </div>
   </mat-tab>
-  <mat-tab label="Finalizado"></mat-tab>
 </mat-tab-group>

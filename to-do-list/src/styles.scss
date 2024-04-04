@@ -8,6 +8,7 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow-x: hidden;
 }
 
 /* You can add global styles to this file, and also import other style files */
@@ -24,7 +25,7 @@ body {
 }
 html,
 body {
-  height: auto;
+  height: 110vh;
 }
 body {
   margin: 0;
@@ -104,8 +105,12 @@ body {
   width: 90% !important;
 }
 
+.todo_tab {
+  overflow-x: hidden;
+}
+
 .todo_card {
-  width: 80%;
+  width: 70%;
   margin: 1rem auto;
   background-color: #ffffff !important;
   border-radius: 1rem !important;
@@ -145,12 +150,12 @@ body {
 }
 
 .edit-task {
-  background: #ffd502 !important;
+  background: #ffa202 !important;
 }
 
 .btn_excluir_todo {
   display: block !important;
   margin: 0 auto;
-  margin-top: 1rem !important;
-  margin-right: 9rem;
+  margin-top: 2rem !important;
+  margin-right: 13rem;
 }

@@ -29,4 +29,20 @@ export class ToDoListSignalsService {
   public deleteLocalStorage(): void {
     localStorage.removeItem(TodoKeyLocalStorage.ToDoList);
   }
+
+  public deleteAllLocalStorage(type: boolean) {
+    let todosString = localStorage.getItem("ToDoList");
+
+    if (todosString !== null) {
+      let todos: to_do_model[] = JSON.parse(todosString) || [];
+
+      todos = todos.filter((todo: to_do_model) => todo.done !== type);
+
+      // Atualize o todoState com os dados filtrados
+      this.toDoState.set(todos);
+
+      // Salve os dados filtrados no armazenamento local
+      localStorage.setItem("ToDoList", JSON.stringify(todos));
+    }
+  }
 }
