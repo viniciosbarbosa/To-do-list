@@ -5,6 +5,7 @@ import {
   Attribute,
   BehaviorSubject,
   BrowserModule,
+  By,
   CSP_NONCE,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -110,17 +111,66 @@ import {
   ɵɵngDeclareInjectable,
   ɵɵngDeclareInjector,
   ɵɵngDeclareNgModule
-} from "./chunk-JBHHZUZN.mjs";
+} from "./chunk-KDBGPKYR.mjs";
 import {
   __spreadProps,
   __spreadValues
 } from "./chunk-SO6IKGEA.mjs";
 
 // angular:jit:template:file:src/app/app.component.html
-var app_component_default = "<app-header></app-header>\n<app-to-do-card></app-to-do-card>\n";
+var app_component_default = '<app-header></app-header>\n<app-to-do-card></app-to-do-card>\n<p *ngIf="renderTestMessage">teste your angular application</p>\n';
 
 // angular:jit:style:file:src/app/app.component.scss
 var app_component_default2 = "/* src/app/app.component.scss */\n";
+
+// src/app/models/enum/toDoKeyLocalStorage.ts
+var TodoKeyLocalStorage;
+(function(TodoKeyLocalStorage2) {
+  TodoKeyLocalStorage2["ToDoList"] = "ToDoList";
+})(TodoKeyLocalStorage || (TodoKeyLocalStorage = {}));
+
+// src/app/services/to-do-list-signals.service.ts
+var ToDoListSignalsService = class ToDoListSignalsService2 {
+  constructor() {
+    this.toDoState = signal([]);
+  }
+  createUpdateToDo(params) {
+    if (params && params.id !== null && params.id !== void 0) {
+      this.toDoState.mutate((to_do) => {
+        if (to_do !== null) {
+          const existingItemIndex = to_do.findIndex((item) => item.id === params.id);
+          if (existingItemIndex !== -1) {
+            to_do[existingItemIndex] = __spreadValues(__spreadValues({}, to_do[existingItemIndex]), params);
+          } else {
+            to_do.push(params);
+          }
+          this.saveInLocalStorage();
+        }
+      });
+    }
+  }
+  saveInLocalStorage() {
+    const dataToDoList = JSON.stringify(this.toDoState());
+    dataToDoList && localStorage.setItem(TodoKeyLocalStorage.ToDoList, dataToDoList);
+  }
+  deleteLocalStorage() {
+    localStorage.removeItem(TodoKeyLocalStorage.ToDoList);
+  }
+  deleteAllLocalStorage(type) {
+    let todosString = localStorage.getItem("ToDoList");
+    if (todosString !== null) {
+      let todos = JSON.parse(todosString) || [];
+      todos = todos.filter((todo) => todo.done !== type);
+      this.toDoState.set(todos);
+      localStorage.setItem("ToDoList", JSON.stringify(todos));
+    }
+  }
+};
+ToDoListSignalsService = __decorate([
+  Injectable({
+    providedIn: "root"
+  })
+], ToDoListSignalsService);
 
 // angular:jit:template:file:src/app/components/header/header.component.html
 var header_component_default = '<header class="header">\n  <h1 class="header_title">To do list</h1>\n  <button\n    mat-icon-button\n    class="header_btn"\n    aria-label="adicionar nova tarefa"\n    (click)="handleOpenModal()"\n  >\n    <mat-icon>add</mat-icon>\n  </button>\n</header>\n';
@@ -15827,55 +15877,6 @@ var matDialogAnimations = {
 // angular:jit:template:file:src/app/components/to-do-form/to-do-form.component.html
 var to_do_form_component_default = '<form [formGroup]="to_do_form" (ngSubmit)="verifyOperationForm()">\n  <section class="todo_form_card">\n    <h1 class="todo_form_title">Adicionar tarefa</h1>\n\n    <mat-form-field\n      color="primary"\n      appearance="outline"\n      class="todo_form_input"\n    >\n      <mat-label>Nome</mat-label>\n      <input matInput formControlName="title" placeholder="nome" />\n    </mat-form-field>\n\n    <mat-form-field\n      color="primary"\n      appearance="outline"\n      class="todo_form_input"\n    >\n      <mat-label>Descri\xE7\xE3o</mat-label>\n      <textarea\n        matInput\n        formControlName="description"\n        placeholder="description"\n      ></textarea>\n    </mat-form-field>\n\n    <div class="todo_form_actions">\n      <button\n        mat-raised-button\n        class="todo_form_sucess_btn"\n        [disabled]="!to_do_form.valid"\n        type="submit"\n      >\n        <span class="txt__btn_success">Adicionar</span>\n      </button>\n\n      <button\n        mat-raised-button\n        type="button"\n        (click)="handleCloseModal()"\n        color="warn"\n      >\n        Cancelar\n      </button>\n    </div>\n  </section>\n</form>\n';
 
-// src/app/models/enum/toDoKeyLocalStorage.ts
-var TodoKeyLocalStorage;
-(function(TodoKeyLocalStorage2) {
-  TodoKeyLocalStorage2["ToDoList"] = "ToDoList";
-})(TodoKeyLocalStorage || (TodoKeyLocalStorage = {}));
-
-// src/app/services/to-do-list-signals.service.ts
-var ToDoListSignalsService = class ToDoListSignalsService2 {
-  constructor() {
-    this.toDoState = signal([]);
-  }
-  createUpdateToDo(params) {
-    if (params && params.id !== null && params.id !== void 0) {
-      this.toDoState.mutate((to_do) => {
-        if (to_do !== null) {
-          const existingItemIndex = to_do.findIndex((item) => item.id === params.id);
-          if (existingItemIndex !== -1) {
-            to_do[existingItemIndex] = __spreadValues(__spreadValues({}, to_do[existingItemIndex]), params);
-          } else {
-            to_do.push(params);
-          }
-          this.saveInLocalStorage();
-        }
-      });
-    }
-  }
-  saveInLocalStorage() {
-    const dataToDoList = JSON.stringify(this.toDoState());
-    dataToDoList && localStorage.setItem(TodoKeyLocalStorage.ToDoList, dataToDoList);
-  }
-  deleteLocalStorage() {
-    localStorage.removeItem(TodoKeyLocalStorage.ToDoList);
-  }
-  deleteAllLocalStorage(type) {
-    let todosString = localStorage.getItem("ToDoList");
-    if (todosString !== null) {
-      let todos = JSON.parse(todosString) || [];
-      todos = todos.filter((todo) => todo.done !== type);
-      this.toDoState.set(todos);
-      localStorage.setItem("ToDoList", JSON.stringify(todos));
-    }
-  }
-};
-ToDoListSignalsService = __decorate([
-  Injectable({
-    providedIn: "root"
-  })
-], ToDoListSignalsService);
-
 // node_modules/@angular/forms/fesm2022/forms.mjs
 var _BaseControlValueAccessor = class _BaseControlValueAccessor {
   constructor(_renderer, _elementRef) {
@@ -25516,14 +25517,24 @@ ToDoCardComponent = __decorate([
 // src/app/app.component.ts
 var _a;
 var AppComponent = (_a = class {
-  constructor() {
+  constructor(toDoListSignalsService) {
+    this.toDoListSignalsService = toDoListSignalsService;
     this.outputEvent = new EventEmitter();
     this.title = "to-do-list";
+    this.renderTestMessage = false;
   }
   handleEmitEvent() {
     this.outputEvent.emit(this.projectName);
   }
-}, _a.propDecorators = {
+  handleCreateToDo(todo) {
+    if (todo) {
+      this.toDoListSignalsService.createUpdateToDo(todo);
+      this.todoSignal = this.toDoListSignalsService.toDoState;
+    }
+  }
+}, _a.ctorParameters = () => [
+  { type: ToDoListSignalsService }
+], _a.propDecorators = {
   projectName: [{ type: Input }],
   outputEvent: [{ type: Output }]
 }, _a);
@@ -25541,12 +25552,15 @@ AppComponent = __decorate([
 describe("AppComponent", () => {
   let component;
   let fixture;
+  let todoSignalsService;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [AppComponent]
+      imports: [AppComponent, BrowserAnimationsModule, NoopAnimationsModule],
+      providers: [ToDoListSignalsService]
     });
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
+    todoSignalsService = TestBed.inject(ToDoListSignalsService);
     fixture.detectChanges();
   });
   it("should create the app", () => {
@@ -25567,6 +25581,33 @@ describe("AppComponent", () => {
         component.handleEmitEvent();
       }
     });
+  });
+  it("should create new todo correctly and call service method", () => {
+    jest.spyOn(todoSignalsService, "createUpdateToDo");
+    const newTodo = {
+      id: 1,
+      title: "testing create Todo",
+      description: "Test new Todos",
+      done: true
+    };
+    component.handleCreateToDo(newTodo);
+    fixture.detectChanges();
+    expect(todoSignalsService.createUpdateToDo).toHaveBeenCalledWith(newTodo);
+    expect(component.todoSignal()).toEqual([newTodo]);
+  });
+  it("should not render paragraph in the dom", () => {
+    const componentDebugElement = fixture.debugElement;
+    const element = componentDebugElement.nativeElement;
+    const paragraph = element.querySelector("p");
+    expect(paragraph).toBeNull();
+  });
+  it("should render paragraph correctly", () => {
+    component.renderTestMessage = true;
+    fixture.detectChanges();
+    const componentDebugElement = fixture.debugElement;
+    const paragraphDebugElement = componentDebugElement.query(By.css("p"));
+    const paragraph = paragraphDebugElement.nativeElement;
+    expect(paragraph.textContent).toEqual("teste your angular application");
   });
 });
 /*! Bundled license information:
