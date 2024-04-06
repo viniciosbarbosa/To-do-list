@@ -1,31 +1,46 @@
 import {
+  ToDoListSignalsService,
+  TodoKeyLocalStorage
+} from "./chunk-GAMYJCHI.mjs";
+import {
+  BrowserModule,
+  By,
+  CommonModule,
+  DOCUMENT,
+  DomRendererFactory2,
+  DomSanitizer,
+  HttpClient,
+  Location,
+  NgClass,
+  NgForOf,
+  NgIf,
+  NgSwitch,
+  NgSwitchCase,
+  NgTemplateOutlet,
+  getDOM,
+  isPlatformBrowser
+} from "./chunk-4B322A5O.mjs";
+import {
   ANIMATION_MODULE_TYPE,
   APP_ID,
   ApplicationRef,
   Attribute,
   BehaviorSubject,
-  BrowserModule,
-  By,
   CSP_NONCE,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  CommonModule,
   Component,
   ComponentFactoryResolver$1,
   ConnectableObservable,
   ContentChild,
   ContentChildren,
-  DOCUMENT,
   Directive,
-  DomRendererFactory2,
-  DomSanitizer,
   EMPTY,
   ElementRef,
   ErrorHandler,
   EventEmitter,
   FactoryTarget,
   Host,
-  HttpClient,
   Inject,
   Injectable,
   InjectionToken,
@@ -33,14 +48,7 @@ import {
   Input,
   IterableDiffers,
   LOCALE_ID,
-  Location,
-  NgClass,
-  NgForOf,
-  NgIf,
   NgModule,
-  NgSwitch,
-  NgSwitchCase,
-  NgTemplateOutlet,
   NgZone,
   Observable,
   Optional,
@@ -83,10 +91,8 @@ import {
   forwardRef,
   from,
   fromEvent,
-  getDOM,
   inject,
   isObservable,
-  isPlatformBrowser,
   isPromise,
   isSubscribable,
   map,
@@ -95,7 +101,6 @@ import {
   pairwise,
   share,
   shareReplay,
-  signal,
   skip,
   startWith,
   switchMap,
@@ -113,7 +118,7 @@ import {
   ɵɵngDeclareInjectable,
   ɵɵngDeclareInjector,
   ɵɵngDeclareNgModule
-} from "./chunk-ZOC5AZGY.mjs";
+} from "./chunk-DYBEG3KM.mjs";
 import {
   __spreadProps,
   __spreadValues
@@ -124,55 +129,6 @@ var app_component_default = '<app-header></app-header>\n<app-to-do-card></app-to
 
 // angular:jit:style:file:src/app/app.component.scss
 var app_component_default2 = "/* src/app/app.component.scss */\n";
-
-// src/app/models/enum/toDoKeyLocalStorage.ts
-var TodoKeyLocalStorage;
-(function(TodoKeyLocalStorage2) {
-  TodoKeyLocalStorage2["ToDoList"] = "ToDoList";
-})(TodoKeyLocalStorage || (TodoKeyLocalStorage = {}));
-
-// src/app/services/to-do-list-signals.service.ts
-var ToDoListSignalsService = class ToDoListSignalsService2 {
-  constructor() {
-    this.toDoState = signal([]);
-  }
-  createUpdateToDo(params) {
-    if (params && params.id !== null && params.id !== void 0) {
-      this.toDoState.mutate((to_do) => {
-        if (to_do !== null) {
-          const existingItemIndex = to_do.findIndex((item) => item.id === params.id);
-          if (existingItemIndex !== -1) {
-            to_do[existingItemIndex] = __spreadValues(__spreadValues({}, to_do[existingItemIndex]), params);
-          } else {
-            to_do.push(params);
-          }
-          this.saveInLocalStorage();
-        }
-      });
-    }
-  }
-  saveInLocalStorage() {
-    const dataToDoList = JSON.stringify(this.toDoState());
-    dataToDoList && localStorage.setItem(TodoKeyLocalStorage.ToDoList, dataToDoList);
-  }
-  deleteLocalStorage() {
-    localStorage.removeItem(TodoKeyLocalStorage.ToDoList);
-  }
-  deleteAllLocalStorage(type) {
-    let todosString = localStorage.getItem("ToDoList");
-    if (todosString !== null) {
-      let todos = JSON.parse(todosString) || [];
-      todos = todos.filter((todo) => todo.done !== type);
-      this.toDoState.set(todos);
-      localStorage.setItem("ToDoList", JSON.stringify(todos));
-    }
-  }
-};
-ToDoListSignalsService = __decorate([
-  Injectable({
-    providedIn: "root"
-  })
-], ToDoListSignalsService);
 
 // angular:jit:template:file:src/app/components/header/header.component.html
 var header_component_default = '<header class="header">\n  <h1 class="header_title">To do list</h1>\n  <button\n    mat-icon-button\n    class="header_btn"\n    aria-label="adicionar nova tarefa"\n    (click)="handleOpenModal()"\n  >\n    <mat-icon>add</mat-icon>\n  </button>\n</header>\n';

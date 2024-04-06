@@ -1,33 +1,35 @@
 import {
-  APP_ID,
   BrowserDomAdapter,
   BrowserModule,
+  DOCUMENT,
+  INTERNAL_BROWSER_PLATFORM_PROVIDERS,
+  LocationStrategy,
+  PLATFORM_BROWSER_ID,
+  PlatformLocation,
+  getDOM
+} from "./chunk-4B322A5O.mjs";
+import {
+  APP_ID,
   COMPILER_OPTIONS,
   Compiler,
   CompilerFactory,
-  DOCUMENT,
   EventEmitter,
   FactoryTarget,
-  INTERNAL_BROWSER_PLATFORM_PROVIDERS,
   Inject,
   Injectable,
   InjectionToken,
   Injector,
-  LocationStrategy,
   MissingTranslationStrategy,
   NgModule,
   Optional,
-  PLATFORM_BROWSER_ID,
   PLATFORM_ID,
   PLATFORM_INITIALIZER,
-  PlatformLocation,
   Subject,
   TestComponentRenderer,
   Version,
   ViewEncapsulation$1,
   core_exports,
   createPlatformFactory,
-  getDOM,
   getTestBed,
   platformCore,
   provideZoneChangeDetection,
@@ -36,7 +38,7 @@ import {
   ɵɵngDeclareInjectable,
   ɵɵngDeclareInjector,
   ɵɵngDeclareNgModule
-} from "./chunk-ZOC5AZGY.mjs";
+} from "./chunk-DYBEG3KM.mjs";
 import {
   CompilerConfig,
   ResourceLoader,
