@@ -1,27 +1,45 @@
-import { TestBed } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { AppComponent } from "./app.component";
+import { first } from "rxjs";
 
-describe('AppComponent', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [AppComponent]
-  }));
+describe("AppComponent", () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
 
-  it('should create the app', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [AppComponent],
+    });
+
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it("should create the app", () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'to-do-list' title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('to-do-list');
+  //teste do @Input()
+  it("should set @Input() property correctly", () => {
+    component.projectName = "Testing Angular with jest";
+
+    fixture.detectChanges();
+
+    expect(component.projectName).toEqual("Testing Angular with jest");
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('to-do-list app is running!');
+  //teste do @Output()
+  it("should emit event with @Output() correctly", () => {
+    component.projectName = "Testing my angular application";
+
+    component.outputEvent.pipe(first()).subscribe({
+      next: (event) => {
+        expect(event).toEqual("Testing Angular with jest");
+        component.handleEmitEvent();
+      },
+    });
   });
 });
