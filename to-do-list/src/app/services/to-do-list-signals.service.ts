@@ -23,7 +23,7 @@ export class ToDoListSignalsService {
           } else {
             to_do.push(params);
           }
-          console.log(to_do);
+
           this.saveInLocalStorage();
         }
       });

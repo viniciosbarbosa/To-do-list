@@ -39,7 +39,6 @@ export class ToDoFormComponent implements OnInit {
   ngOnInit(): void {
     this.carregarForm();
     if (this.dataModalCard) {
-      console.log(this.dataModalCard);
       this.setValueForm(this.dataModalCard.item);
     }
   }

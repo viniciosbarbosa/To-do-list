@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/components/to-do-card/to-do-card.component.spec.ts"],
+  "sourcesContent": ["import { ComponentFixture, TestBed } from '@angular/core/testing';\n\nimport { ToDoCardComponent } from './to-do-card.component';\n\ndescribe('ToDoCardComponent', () => {\n  let component: ToDoCardComponent;\n  let fixture: ComponentFixture<ToDoCardComponent>;\n\n  beforeEach(() => {\n    TestBed.configureTestingModule({\n      imports: [ToDoCardComponent]\n    });\n    fixture = TestBed.createComponent(ToDoCardComponent);\n    component = fixture.componentInstance;\n    fixture.detectChanges();\n  });\n\n  it('should create', () => {\n    expect(component).toBeTruthy();\n  });\n});\n"],
+  "mappings": ";;;;;;;;;;;;;AAIA,SAAS,qBAAqB,MAAK;AACjC,MAAI;AACJ,MAAI;AAEJ,aAAW,MAAK;AACd,YAAQ,uBAAuB;MAC7B,SAAS,CAAC,iBAAiB;KAC5B;AACD,cAAU,QAAQ,gBAAgB,iBAAiB;AACnD,gBAAY,QAAQ;AACpB,YAAQ,cAAa;EACvB,CAAC;AAED,KAAG,iBAAiB,MAAK;AACvB,WAAO,SAAS,EAAE,WAAU;EAC9B,CAAC;AACH,CAAC;",
+  "names": []
+}

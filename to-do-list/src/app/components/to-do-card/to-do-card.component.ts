@@ -34,7 +34,6 @@ export class ToDoCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDatasLocalStorage();
-    console.log(this.toDoListData());
   }
 
   getDatasLocalStorage(): void {
@@ -44,8 +43,6 @@ export class ToDoCardComponent implements OnInit {
 
     toDoData && this.toDoState.set(JSON.parse(toDoData));
     this.statusBtn();
-
-    console.log("passou");
   }
 
   public statusBtn(): void {
@@ -68,8 +65,6 @@ export class ToDoCardComponent implements OnInit {
           (todo) => todo?.id === toDoId
         ) as to_do_model;
 
-        console.log(todoSelected);
-
         todoSelected && (todoSelected.done = true);
 
         this.saveInLocalStorage();
@@ -83,8 +78,6 @@ export class ToDoCardComponent implements OnInit {
         const todoSelected = todos.find(
           (todo) => todo?.id === toDoId
         ) as to_do_model;
-
-        console.log(todoSelected);
 
         todoSelected && (todoSelected.done = false);
 
@@ -116,8 +109,6 @@ export class ToDoCardComponent implements OnInit {
         elementsFiltred.push(element);
       }
     });
-
-    console.log(elementsFiltred);
 
     this.toDoListSignalsService.deleteAllLocalStorage(type);
 
