@@ -75,6 +75,7 @@ import {
   debounceTime,
   defer,
   distinctUntilChanged,
+  fakeAsync,
   filter,
   finalize,
   first,
@@ -103,6 +104,7 @@ import {
   takeWhile,
   tap,
   throwError,
+  tick,
   timer,
   ɵɵngDeclareClassMetadata,
   ɵɵngDeclareComponent,
@@ -111,7 +113,7 @@ import {
   ɵɵngDeclareInjectable,
   ɵɵngDeclareInjector,
   ɵɵngDeclareNgModule
-} from "./chunk-KDBGPKYR.mjs";
+} from "./chunk-ZOC5AZGY.mjs";
 import {
   __spreadProps,
   __spreadValues
@@ -25522,6 +25524,7 @@ var AppComponent = (_a = class {
     this.outputEvent = new EventEmitter();
     this.title = "to-do-list";
     this.renderTestMessage = false;
+    this.isDoned = false;
   }
   handleEmitEvent() {
     this.outputEvent.emit(this.projectName);
@@ -25531,6 +25534,11 @@ var AppComponent = (_a = class {
       this.toDoListSignalsService.createUpdateToDo(todo);
       this.todoSignal = this.toDoListSignalsService.toDoState;
     }
+  }
+  handleCheckIsDone() {
+    setTimeout(() => {
+      this.isDoned = true;
+    }, 200);
   }
 }, _a.ctorParameters = () => [
   { type: ToDoListSignalsService }
@@ -25609,6 +25617,15 @@ describe("AppComponent", () => {
     const paragraph = paragraphDebugElement.nativeElement;
     expect(paragraph.textContent).toEqual("teste your angular application");
   });
+  it("should isDone property to be false", () => {
+    component.handleCheckIsDone();
+    expect(component.isDoned).toBe(false);
+  });
+  it("should isDone property to be true", fakeAsync(() => {
+    component.handleCheckIsDone();
+    tick(200);
+    expect(component.isDoned).toBe(true);
+  }));
 });
 /*! Bundled license information:
 

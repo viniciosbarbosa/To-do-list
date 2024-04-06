@@ -36,7 +36,7 @@ import {
   ɵɵngDeclareInjectable,
   ɵɵngDeclareInjector,
   ɵɵngDeclareNgModule
-} from "./chunk-KDBGPKYR.mjs";
+} from "./chunk-ZOC5AZGY.mjs";
 import {
   CompilerConfig,
   ResourceLoader,

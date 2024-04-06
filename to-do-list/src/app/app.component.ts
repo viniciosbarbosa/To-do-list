@@ -24,6 +24,7 @@ export class AppComponent {
   title = "to-do-list";
   public todoSignal!: WritableSignal<Array<to_do_model>>;
   public renderTestMessage = false;
+  public isDoned = false;
 
   constructor(private toDoListSignalsService: ToDoListSignalsService) {}
 
@@ -36,5 +37,11 @@ export class AppComponent {
       this.toDoListSignalsService.createUpdateToDo(todo);
       this.todoSignal = this.toDoListSignalsService.toDoState;
     }
+  }
+
+  public handleCheckIsDone(): void {
+    setTimeout(() => {
+      this.isDoned = true;
+    }, 200);
   }
 }

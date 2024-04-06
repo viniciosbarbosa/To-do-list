@@ -1,5 +1,10 @@
 import { Component, DebugElement } from "@angular/core";
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick,
+} from "@angular/core/testing";
 import { AppComponent } from "./app.component";
 import { first } from "rxjs";
 import { ToDoListSignalsService } from "./services/to-do-list-signals.service";
@@ -95,4 +100,18 @@ describe("AppComponent", () => {
 
     expect(paragraph.textContent).toEqual("teste your angular application");
   });
+
+  //Teste de setTimeOut
+  it("should isDone property to be false", () => {
+    component.handleCheckIsDone();
+    expect(component.isDoned).toBe(false);
+  });
+
+  //
+  it("should isDone property to be true", fakeAsync(() => {
+    component.handleCheckIsDone();
+    tick(200);
+
+    expect(component.isDoned).toBe(true);
+  }));
 });
